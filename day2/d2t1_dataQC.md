@@ -24,11 +24,11 @@ Where:
 
 The actual command prompt on your terminal will be in a format something like this:
 ```
-		[corso@benode01 'your_folder']$
+[corso@benode01 'your_folder']$
 ```
 e.g in my case the command prompt looks like this:
 ```
-	[corso@benode01 chiara]$
+[corso@benode01 chiara]$
 ```
 
 
@@ -40,7 +40,7 @@ However, to save space in this manual I have replaced the actual command prompt 
 The text in   ```  this gray boxes ```  is the actual text you need to type into the command window to run the software.
 
 
-**NOTE:  After typing in a command, hit return to execute that command**
+**NOTE:  After typing in a command hit return to execute that command**
 
 
 A command is generally the name of the software to be used followed by a list of parameters and options for how the software should be run. **For example**, the command below will run the software cutadapt. The text after cutadapt i.e.  -a, -i and -o are all cutadapt parameters followed by their input values
@@ -55,7 +55,7 @@ A command is generally the name of the software to be used followed by a list of
 At certain points during this practical questions will be asked and a blank space left for you to fill in your answers. Questions are written in green text.
 ## Step1: Copy and check the data files
 
-The data we will be using today comes from [a publication](http://goo.gl/dcKbB) where they used next generation sequencing to investigate population genetics of *Vibrio cholera*, following a cholera outbreak in the aftermath of the Haitian earthquake in 2010. The accession number for the complete data set is SRA039806, with the paired end data files having the accession number SRR308665.
+The data we will be using today comes from a [publication](http://goo.gl/dcKbB) where they used next generation sequencing to investigate population genetics of *Vibrio cholera*, following a cholera outbreak in the aftermath of the Haitian earthquake in 2010. The accession number for the complete data set is SRA039806, with the paired end data files having the accession number SRR308665.
 
 Paired end 1 data file         = paired_end1.fastq
 
@@ -113,7 +113,9 @@ If you replaced the  ``` . ```  with a path e.g. home/MyDirectory/ then the file
 >$ ls
 ```
 ---
+>
 > You can also copy all the files with a single command, do you know how to do this?
+>
 ---
 
 Fastq files are usually too large to open with text editors, but there are Unix commands to help you look at your data.  Use the ``` more ``` command to view your fastq files (note the fastq format as described in the presentation earlier).
