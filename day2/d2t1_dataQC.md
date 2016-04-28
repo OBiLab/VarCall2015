@@ -135,6 +135,8 @@ Try the ``` head ``` command which displays just the first 10 lines of a file
 > **Question** – There is also a Unix command called ‘tail’, given what the ‘head’ command does what do you think ‘tail’ will do? Try it on one of your data files.
 >
 ---
+
+
 Now that you have checked the fastq files are there and viewed them you can proceed with the workflow.
 
 
