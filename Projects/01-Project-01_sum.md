@@ -70,7 +70,7 @@ We will use an algorithm that analyses the data making an hypothesis about the n
 
 ADMIXTURE produces outputs like this:
 
->![alt text](img/adm1kgsm.png)
+>![alt text](../img/adm1kgsm.png)
 
 >This plot is from the [1000 Genomes Nature's paper](http://www.nature.com/nature/journal/v526/n7571/full/nature15393.html). Every vertical line corresponds to one individual and colors represent subdivisions in clusters according to genetic similarities. Each individual is colored with  one or more colors according to the likelihood of belonging to one or more clusters.
 
@@ -286,7 +286,7 @@ Although admixture takes as input only the `.bed` file, the others are equally r
 
 ##### 3.3 Prune to reduce the number of markers
 
-![prune](img/prune.png)
+![prune](../img/prune.png)
 
 Usually 10-100k markers are required for a proper ADMIXTURE analysis, whereas if you count the lines of the `.map` file you will see that we are considering many more markers. PLINK has an option to prune the number of markers.
 
@@ -469,7 +469,7 @@ Prepare two slides:
 - explain the NGS pipeline
 - show the results
 
-![brain](img/creative-brain.png)
+![brain](../img/creative-brain.png)
 
 
 <div id='section-id-435'/>
@@ -478,7 +478,7 @@ Prepare two slides:
 
 To summarize, below is a list of all the task-specific softwares that we need to use. We will run some of them and use only file formats from others.
 
-  ![Pipeline](img/filepipe_s.png)
+  ![Pipeline](../img/filepipe_s.png)
 
 
 <div id='section-id-442'/>
