@@ -153,7 +153,7 @@ Start the nano text editor:
 List the files in the directory. Can you see the ``` myfile.txt ```?
 
 ```
-  [corso@benode01]$ ls -l
+[corso@benode01]$ ls -l
 
 ```
 ------
@@ -210,8 +210,8 @@ Access rights on directories:
 The command to change access rights is [chmod](https://en.wikipedia.org/wiki/Chmod)
 
 ```
-$ chmod go-rwx myfile.txt
-$ chmod a+x my_script
+[corso@benode01]$ chmod go-rwx myfile.txt
+[corso@benode01]$ chmod a+x my_script
 
 ```
 | **Symbol**  |**Meaning** |
@@ -230,4 +230,120 @@ $ chmod a+x my_script
 
 Write commands in a file and make the file executable:
 
-[first](../img/first.png)
+[first](../img/fisrt.png)
+
+
+>**&#!/bin/bash**
+> "Aha, you want to use the program located at /bin/bash to interpret all the instructions that follow"
+(Bradnam&Korf - Unix and Perl to the Rescue)
+
+Great Job! Now you want to execute the script. First you have to tell Unix where it can find it.
+
+### Where Unix searches for programs?
+
+Once you have made a script executable you can always run it by prefixing its name with a path:
+
+```
+./shell_commands.sh
+
+~allegra/Documents/shell_commands.sh
+
+```
+- Anytime you are running a program, Unix will check through **a list of predefined directories** to see if that program exists in any of those locations.
+- If it finds a match, it will try running the program and stop looking in any other directory.
+- If it cannot find a match, it will print ``` command not found ```
+
+### UNIX environment variables
+
+Unix keeps track of several special variables that are associated with your account:
+
+- Written in upper-case letters
+- Start with a $
+- echo $SHELL
+- printenv SHELL
+- echo $PATH
+
+### How to write shell commands in a file and make the file executable
+
+Write a text file and save it as shell_commands.sh:
+
+[first2](../img/first2.png)
+
+```
+[corso@benode01]$ chmod a+x shell_commands.sh
+[corso@benode01]$ ./shell_commands.sh
+My first script
+The current shell is:
+/bin/bash
+My username is:
+allegra1
+[corso@benode01]$
+
+```
+
+## echo $PATH
+
+If the system returns a message saying:
+```
+command: Command not found
+```
+this indicates that **either the command doesn't exist at all on the system or it is simply not in your path.**
+
+#### for shells in the bash family
+```
+export PATH=$PATH:~/allegra/my_scripts
+```
+
+#### for shells in the csh family
+```
+setenv PATH $PATH\:~/allegra/my_scripts
+```
+
+- Any program in ~/allegra/my_scripts can be run from anywhere in the filesystem (as long as the program file is executable)
+- You can use tab-completion
+- Your scripts will be treated like any Unix command
+
+## Connecting to a remote computer
+
+```
+ssh remote_host
+```
+The *remote_host* is the IP address or domain name that you are trying to connect to.
+
+If your username is different on the remote system:
+
+```
+ssh remote_username@remote_host
+```
+
+Once you have connected to the server, you will probably be asked to verify your identity by providing a password.
+
+
+## Transferring files to/from a remote computer
+
+Two ways of doing it:
+
+```
+sftp username@host
+```
+
+Enter your password when prompted
+Several Unix commands do work
+get  Copy a file from the remote computer to the local computer.
+put  Copy a file from the local computer to the remote computer.
+
+  ```scp ``` copies files over a secure, encrypted network connection.
+
+```
+scp /home/image*.jpg allegra@myhost.com:/home/images
+scp allegra@myhost.com:/home/image*.jpg /home/allegra/downloads
+
+scp [-12346BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file]
+    [-l limit] [-o ssh_option] [-P port] [-S program]
+    [[user@]host1:]file1 ... [[user@]host2:]file2
+```
+
+Enter your password when prompted
+
+
+## Non-interactive download of files from the Web
