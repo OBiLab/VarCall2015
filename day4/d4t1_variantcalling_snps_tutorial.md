@@ -44,7 +44,7 @@ If you are starting your analyses directly from a `.bam` file created by someone
 
 #### Getting the Data
 
-Move to your scratch area
+Move to your directory
 ```
 cd /home/corso/students/yuorname
 
