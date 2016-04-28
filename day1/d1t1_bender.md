@@ -34,7 +34,7 @@ time:
 We will be hosted for this course on a machine named Bender. This machine is on the top floor in this building and has all the software we need installed and tested.
 
 To use remote machine the first step is to get connected to them and one protocol for connection is called [**Secure Shell**](https://en.wikipedia.org/wiki/Secure_Shell) or **SSH**.
-![bender](img/benderssh.png)
+![bender](../img/benderssh.png)
 Before using the remote machine you should have talked to the machine administrator that will create an account for you with a username and a password. Once you obtain an account,  you can use SSH from your terminal. The basic instruction for connection is the command ```ssh``` followed by the username and the [IP address](https://en.wikipedia.org/wiki/IP_address) of the machine. Some times to  simplify we use a literal synonim of the IP address:
 
 ```
@@ -80,7 +80,7 @@ The ``` -X ``` option allow some graphical visualization. Note how username has 
 
 Bender is a very organized machine. Let's look a little bit closer to this:  
 
-![bender](img/benderscheme.png)
+![bender](../img/benderscheme.png)
 
 <div id='section-id-103'/>
 
@@ -224,7 +224,7 @@ $ exit
 
 Bender is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
 
-![queue](img/queue.png)
+![queue](../img/queue.png)
 
 Bender has a job scheduling system named PBS. To become familiar with PBS read its interesting story on the [PBS wiki page](https://en.wikipedia.org/wiki/Portable_Batch_System), go through the [official documentation](http://www.pbsworks.com/SupportGT.aspx?d=PBS-Professional,-Documentation), or google for one of the many tutorials available.
 
