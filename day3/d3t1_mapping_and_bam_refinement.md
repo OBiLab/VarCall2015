@@ -43,34 +43,43 @@ Characteristics of the experiment:
 
 ## Getting the Data
 
-Move to your scratch area:
+Move to your directory:
+
 ```
-cd $CINECA_SCRATCH
+cd your_directory
+[corso@benode01 chiara]$
+
 ```
 
 copy folder from teaching directory for use:
 ```
-cp -r /pico/scratch/userexternal/cbatini0/day3 .
+cp -r /home/corso/varcall2016/day3
 ```
 
 move to new folder:
+
 ```
 cd day3
+[corso@benode01 chiara/day3]$
+
 ```
 
 You should now be in a folder called day3 containing:
 - read data (lane1, lane2)
 - a reference genome (Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa)
 - coordinates of yeast mtDNA (mito.intervals)
-- the pdf of the slides (day3_mapping_BAM_refinement_nov2015.pdf)
-- the pdf of this handbook (day3_mapping_BAM_refinement_handbook_nov2015.pdf)
+
+Check your location in the file directory using the ``` pwd `` command: you should be in:
+
+```
+/home/corso/students/yourname//day3)
+
+```
+
+Check the contents of the folder using the ```ls``` command (and options)
 
 ```
 ls -l
-
-
--rw-r--r-- 1 user user   365964 Nov 26 12:58 day3_mapping_BAM_refinement_handbook_nov2015_participants_2.pdf
--rw-r--r-- 1 user user  2857767 Nov 26 12:58 day3_mapping_BAM_refinement_nov2015.pdf
 drwxr-xr-x 2 user user     4096 Nov 26 12:58 lane1
 drwxr-xr-x 2 user user     4096 Nov 26 12:58 lane2
 -rwxr-xr-x 1 user user       13 Nov 26 12:58 mito.intervals
@@ -78,23 +87,18 @@ drwxr-xr-x 2 user user     4096 Nov 26 12:58 lane2
 
 ```
 
-*Hint:* you can use scp to copy files locally.
 
-Check your location in the file directory using the `pwd` command. You should be in your scratch directory:
 
-```
-/pico/scratch/userexternal/username/day3
-```
-
-Check the contents of the folder using the `ls` command.
 
 ## Create Index and dictionary files of the reference genome for samtools, bwa and picard
 
 Indices are necessary for quick access to specific information in very large files. Here we will create indices for the Saccharomyces reference genome for tools we will use downstream in the pipeline. For example the samtools index file `ref_name.fai`, stores records of sequence identifier, length, the offset of the first sequence character in the file, the number of characters per line and the number of bytes per line.
 
 You should be in:
+
 ```
-/pico/scratch/userexternal/username/day3
+/home/corso/students/yourname/day3
+
 ```
 
 As you generate each index look at the files created using the `ls` command.
@@ -103,26 +107,35 @@ As you generate each index look at the files created using the `ls` command.
 
 Samtools index:
 ```
-module load autoload samtools
 samtools faidx Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa
+
 ```
+
 bwa index:
+
 ```
-module load bwa
 bwa index -a is Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa
+
 ```
-> `-a is` *sets the algorithm to be used to construct a suffix array. This is suitable for databases smaller than 2GB*
+
+ > `-a is` *sets the algorithm to be used to construct a suffix array. This is suitable for databases smaller than 2GB*
 
 
 Picard Dictionary:
+
 ```
-module load autoload picard
-java -jar /cineca/prod/applications/picard/1.119/binary/bin/CreateSequenceDictionary.jar R= Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa O= Saccharomyces_cerevisiae.EF4.68.dna.toplevel.dict
+java1_8 -jar /opt/bio/picard.jar CreateSequenceDictionary R=Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa O=Saccharomyces_cerevisiae.EF4.68.dna.toplevel.dict
+
 ```
-#### Question - Name the extensions of the files (e.g. ‘.txt’, ‘.sam’) that have been created for indices of
-- samtools:    
-- bwa:
-- picard:
+
+---
+>
+>Question - Name the extensions of the files (e.g. ‘.txt’, ‘.sam’) that have been created for indices of
+>- samtools:    
+>- bwa:
+>- picard:
+>
+---
 
 
 ## Align reads to the Reference Genome using BWA
@@ -130,14 +143,19 @@ java -jar /cineca/prod/applications/picard/1.119/binary/bin/CreateSequenceDictio
 BWA uses the burrows wheeler algorithm to compress data and efficiently parse the reference for sequence matches. Bwa mem is the latest bwa algorithm and is recommended for high-quality data as it is faster and more accurate.
 
 You should be in:
+
 ```
-/pico/scratch/userexternal/username/day3
+/home/corso/students/yourname/day3
+
 ```
 
-### Align reads using `bwa mem`:
+Align reads using `bwa mem`:
+
 ```
 bwa mem -M Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa lane1/s-7-1.fastq lane1/s-7-2.fastq > lane1.sam
+
 ```
+
 >- `-M` *Mark shorter split hits as secondary (for Picard compatibility). See [here](https://www.biostars.org/p/97323/).
 
 >>- With option -M it is flagged as a uplicate flag=256 ( not primary alignment ): will be ignored by most 'old' tools.
@@ -151,7 +169,8 @@ bwa mem -M Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa lane1/s-7-1.fastq lan
 
 Check the bwa manual for more options
 
-### Convert the new sam file to bam format (bam is a binary version of the sam format)
+
+Convert the new sam file to bam format (bam is a binary version of the sam format)
 
 ```
 samtools view -S -b lane1.sam -o lane1.bam
@@ -161,28 +180,40 @@ samtools view -S -b lane1.sam -o lane1.bam
 >- `-b`: Output a bam file.
 >- `-o`: Output file
 
-###  Sort the `.bam` (**Note** that this adds the `.bam` extension automatically!). Samtools sorts alignments by their leftmost chromosomal coordinates. (Can sort by read name instead using `–t` option.).
+
+Sort the `.bam` (**Note** that this adds the `.bam` extension automatically!). Samtools sorts alignments by their leftmost chromosomal coordinates. (Can sort by read name instead using `–t` option.).
 ```
 samtools sort lane1.bam lane1_sorted
 ```
 
-### Index the sorted `.bam` for fast access:
+
+Index the sorted `.bam` for fast access:
 ```
 samtools index lane1_sorted.bam
 ```
-#### Question - Can you guess the extension of this file? Check it in your folder… (use the shell `ls` command and options)
 
-### Have a look at the header of your new `.bam` file:
+---
+>
+>Question - Can you guess the extension of this file? Check it in your folder… (use the shell `ls` command and options)
+>
+---
+
+Have a look at the header of your new `.bam` file:
+
 ```
 samtools view –H lane1_sorted.bam
 ```
-#### Question - How many chromosomes are present and which version of the SAM is it?
+---
+>
+> Question - How many chromosomes are present and which version of the SAM is it?
+>
+> Use unix command more on your SAM file and check what is after the header...
+>
+>Question - Align lane 2 data, convert to sam, sort and index using the samtools commands above, but changing the file names where appropriate.
+>
+----
 
-#### Use unix command more on your SAM file and check what is after the header...
-
-#### Question - Align lane 2 data, convert to sam, sort and index using the samtools commands above, but changing the file names where appropriate.
-
-**Note:** you can use the arrow keys to move through commands you have issued in the terminal – file and folder names can then be easily changed in earlier commands. Try to save a copy of the new commands you use or use the history command to keep a record of what you have done.
+**Note:** you can use the **arrow keys** to move through commands you have issued in the terminal – file and folder names can then be easily changed in earlier commands. Try to save a copy of the new commands you use or use the **history** command to keep a record of what you have done.
 
 **CHECK**    you should now have aligned sorted and indexed files for both lanes:
 ```
@@ -192,33 +223,35 @@ lane2_sorted.bam
 lane2_sorted.bam.bai
 ```
 
-### Merge BAMs per library using picard MergeSamFiles
+
+Merge BAMs per library using picard MergeSamFiles
 ```
 java -jar /cineca/prod/applications/picard/1.119/binary/bin/MergeSamFiles.jar INPUT=lane1_sorted.bam INPUT=lane2_sorted.bam OUTPUT=library.bam
 ```
 
-### Add read group header using picard AddOrReplaceReadGroups (please keep in mind that there is a way to do this during the alignment with bwa with the option `-R`)
+
+Add read group header using picard AddOrReplaceReadGroups (please keep in mind that there is a way to do this during the alignment with bwa with the option `-R`)
 ```
 java -jar /cineca/prod/applications/picard/1.119/binary/bin/AddOrReplaceReadGroups.jar INPUT=library.bam OUTPUT=library_RG.bam RGID=1 RGLB=library RGPL=Illumina RGPU=lane1_2 RGSM=yeast
 ```
 
+![read](../img/redgroup.png)
 
-## Index and sort the merged bam file with read groups
+## Sort and index the merged bam file with read groups
 
-### BAM refinement – local realignment and duplicate removal
+## BAM refinement – local realignment and duplicate removal
 
-#### Local alignment with GATK
+
+### Local alignment with GATK
+
 Indels in the data that are not present in the reference genome can cause small mis-alignments at the end of the reads. GATK’s local re-alignment identifies the areas characterized by a high number of mis-matching bases and realigns the reads around it.
 
 You should be in:
 ```
-/pico/scratch/userexternal/username/day3
+/home/corso/students/yourname/day3
+
 ```
 
-Load the GATK module:
-```
-module load autoload gatk/3.3.0
-```
 We are using the Genome Anlaysis Toolkit (GenomeAnalysisTK.jar) to carry out local re-alignment.
 The options for commands below are:
 - `-l`    input bam file
@@ -228,31 +261,43 @@ The options for commands below are:
 
 1. RealignerTargetCreator: identifies regions that need re-alignment
 ```
-java -jar /cineca/prod/applications/gatk/3.3.0/jre--1.7.0_72/GenomeAnalysisTK.jar -I library_RG_sorted.bam -R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa -T RealignerTargetCreator -o library_targets.intervals    
+java1_8 -jar /opt/bio/GenomeAnalysisTK.jar
+-I library_RG_sorted.bam
+-R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa
+-T RealignerTargetCreator
+-o library_targets.intervals
+
 ```
 2. IndelRealigner: re-aligns target regions
 ```
-java -jar /cineca/prod/applications/gatk/3.3.0/jre--1.7.0_72/GenomeAnalysisTK.jar -I library_RG_sorted.bam -R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa -T IndelRealigner -targetIntervals library_targets.intervals -o library_RG_sorted_lr.bam
+java1_8 -jar /opt/bio/GenomeAnalysisTK.jar
+-I library_RG_sorted.bam
+-R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa
+-T IndelRealigner
+-targetIntervals library_targets.intervals
+-o library_RG_sorted_lr.bam
 ```
 
 More options can be found in the documentation on the [GATK website](http://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_sting_gatk_walkers_indels_RealignerTargetCreator.html)
 
 
-####  Duplicate removal with picard
+###  Duplicate removal with picard
 
 PCR duplicates may confound coverage estimates and amplify the effects of mis-calls.
 
 You should be in:
 ```
-/pico/scratch/userexternal/username/day3
+/home/corso/students/yourname/day3
 ```
 
 Remove duplicates using picard `MarkDuplicates`:
 ```
-java -jar /cineca/prod/applications/picard/1.119/binary/bin/MarkDuplicates.jar INPUT=library_RG_sorted_lr.bam OUTPUT=library_final.bam METRICS_FILE=dupl_metrics.txt
+java1_8 -jar /opt/bio/picard.jar MarkDuplicates INPUT=library_RG_sorted_lr.bam OUTPUT=library_final.bam METRICS_FILE=dupl_metrics.txt
 ```
 
 **Sort and index library_final.bam file**
+
+
 
 ## BAM QC
 
@@ -260,23 +305,32 @@ look at metrics file from bam refinement
 ```
 gedit dupl_metrics.txt &
 ```
-
-#### Question - What's the percentage of duplicated reads?
+---
+>
+> Question - What's the percentage of duplicated reads?
+>
+----
 
 Get samtools flagstat metrics
 ```
-samtools flagstat library.bam > library_raw_flagstat.txt        
-samtools flagstat library_final_sorted.bam > library_flagstat.txt    
+samtools flagstat library.bam > library_raw_flagstat.txt		
+samtools flagstat library_final_sorted.bam > library_flagstat.txt   
 ```
+---
+>
+>Note the differences between samtools flagstat output before and after refinement.
+>
+------
 
-#### Question - Note the differences between samtools flagstat output before and after refinement.
 
 Look at the coverage per position in mitochondria
 ```
-java -jar /cineca/prod/applications/gatk/3.3.0/jre--1.7.0_72/GenomeAnalysisTK.jar -T DepthOfCoverage -R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa -I library_final_sorted.bam -o mito_coverage -L mito.intervals
+java1_8 -jar /opt/bio/GenomeAnalysisTK.jar -T DepthOfCoverage -R Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa -I library_final_sorted.bam -o mito_coverage -L mito.intervals
+
 ```
 >Option used:
 > - `-L`: interval list for genes of interest
+
 
 Look at average coverage
 ```
@@ -294,19 +348,22 @@ Be patient when you use IGV.
 
 ## Extract mtDNA from final BAM
 ```
-samtools view -b -o mito.bam library_final_sorted.bam Mito
+samtools view -bh -o mito.bam library_final_sorted.bam Mito
 ```
 
-#### Challenge  - Index the mito bam file
+---
+>
+> Index the mito bam file
+>
+>Do you know why we have used Mito to extract the mtDNA? Check your dictionary or your bam header.
+>
+>Challenge - Download the mito bam file, its index and the reference genome fast file locally. Hint: you can use scp to copy files locally.
 
-#### Question - Do you know why we have used Mito to extract the mtDNA? Check your dictionary or your bam header.
+>You will see that the default reference genome loaded is Human hg19. Load your reference genome (check Genomes) and then your bam file (check File).
 
-#### Challenge - Download the mito bam file, its index and the reference genome fast file locally. Hint: you can use scp to copy files locally.
-
-You will see that the default reference genome loaded is Human hg19. Load your reference genome (check Genomes) and then your bam file (check File).
-
-#### Question - What can you see in the IGV visualisation, that is not obvious in the mito_coverage.sample_summary?
-
+>What can you see in the IGV visualisation, that is not obvious in the mito_coverage.sample_summary?
+>
+----
 
 
 ## Plot coverage per position for the mtDNA with R
@@ -318,7 +375,6 @@ more mito_coverage
 ### Start R
 
 ```
-module load r
 R
 ```
 
@@ -326,7 +382,7 @@ Once in R, import the file mito_coverage as a table, create a new column contain
 
 ```
 #import the table, specifying tab as the separator among columns and defining the first row as a header
-data <- read.table("/pico/scratch/userexternal/cbatini0/day3/mito_coverage", sep="\t", header=T)
+data <- read.table("/home/corso/your_directory/day3/mito_coverage", sep="\t", header=T)
 
 #check the names of the columns
 names(data)
