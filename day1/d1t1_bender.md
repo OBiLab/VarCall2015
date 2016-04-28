@@ -2,7 +2,7 @@
 course: NGS for evolutionary biologists: from basic scripting to variant calling
 title: getting connected and organizing the space
 author: Enza Colonna
-credits: Mario Aversano 
+credits: Mario Aversano
 time:
 ---
 
@@ -24,7 +24,7 @@ time:
 
 
 
-# Bender 
+# Bender
 
 <div id='section-id-32'/>
 
@@ -32,9 +32,9 @@ time:
 
 We will be hosted for this course on a machine named Bender. This machine is on the top floor in this building and has all the software we need installed and tested.
 
-To use remote machine the first step is to get connected to them and one protocol for connection is called [**Secure Shell**](https://en.wikipedia.org/wiki/Secure_Shell) or **SSH**. 
+To use remote machine the first step is to get connected to them and one protocol for connection is called [**Secure Shell**](https://en.wikipedia.org/wiki/Secure_Shell) or **SSH**.
 ![bender](img/benderssh.png)
-Before using the remote machine you should have talked to the machine administrator that will create an account for you with a username and a password. Once you obtain an account,  you can use SSH from your terminal. The basic instruction for connection is the command ```ssh``` followed by the username and the [IP address](https://en.wikipedia.org/wiki/IP_address) of the machine. Some times to  simplify we use a literal synonim of the IP address: 
+Before using the remote machine you should have talked to the machine administrator that will create an account for you with a username and a password. Once you obtain an account,  you can use SSH from your terminal. The basic instruction for connection is the command ```ssh``` followed by the username and the [IP address](https://en.wikipedia.org/wiki/IP_address) of the machine. Some times to  simplify we use a literal synonim of the IP address:
 
 ```
 $ ssh username@111.111.1111.11
@@ -43,12 +43,12 @@ $ ssh usrname@machinename
 
 ```
 
-Once connected, if it is the first time you will be asked to confirm that you really want to connect to the machine, otherwise you will be just asked to type a password. 
+Once connected, if it is the first time you will be asked to confirm that you really want to connect to the machine, otherwise you will be just asked to type a password.
 
 *Beware: you won't se any letter on your screen while you type the password!*
 
 
-We have created a shared user name for this course that is ```corso```, while the domani name for the machine is ```bender.igb.cnr.it```. Therefore to  **connect to Bender** we will type: 
+We have created a shared user name for this course that is ```corso```, while the domani name for the machine is ```bender.igb.cnr.it```. Therefore to  **connect to Bender** we will type:
 
 ```
 auser@itslaptop:$ ssh -X corso@bender.igb.cnr.it
@@ -65,11 +65,11 @@ auser@itslaptop:$ ssh -X corso@bender.igb.cnr.it
        |__|  \____/   |______  /\___  >___|  /\____ |\___  >__|
                              \/     \/     \/      \/    \/
 
-[corso@bender ~]$ 
+[corso@bender ~]$
 
 
 ```
-The ``` -X ``` option allow some graphical visualization. Note how username has canged at the prompt after ssh. 
+The ``` -X ``` option allow some graphical visualization. Note how username has canged at the prompt after ssh.
 
 <div id='section-id-45'/>
 
@@ -83,34 +83,36 @@ Bender is a very organized machine. Let's look a little bit closer to this:
 
 <div id='section-id-103'/>
 
-### GATEWAY 
+### GATEWAY
 
 This is the access point to Bender form the public network when we ssh to Bender we arrive here as first instance. *We are not allowed to work in this space*, it is instead necessary to go in one of the Worker Nodes (see below).  
 
 <div id='section-id-128'/>
 
-### WORKER NODES 
+### WORKER NODES
 
-You can use ```ssh``` to connect to a worker node: 
+You can use ```ssh``` to connect to a worker node:
 
 ```
-MARIO 
+[corso@bender ~]$ ssh -X corso@benode01.igb.cnr.it
+
 ```
-but to make life easier we have created a shortcut and to go to node one you only need to type: 
+but to make life easier we have created a shortcut and to go to node one you only need to type:
 
 ```
 [corso@bender ~]$ 01
 Last login: Wed Apr 27 09:09:45 2016 from bender
-[corso@benode01 ~]$ 
+[corso@benode01 ~]$
 
 ```
+To distribute the work equally on different nodes, you will be assigned to a specific node for the course.
 
 
-### FILE SYSTEM 
+### FILE SYSTEM
 
-Once connected you will be sharing the same workspace with other users. It is therefore important to respect some rules and beware of other people folders! 
+Once connected you will be sharing the same workspace with other users. It is therefore important to respect some rules and beware of other people folders!
 
-The file system is subdivided in these main folders: 
+The file system is subdivided in these main folders:
 
 ```
 drwxrwxr-x  4 corso corso 4096 26 apr 12:34 chiara
@@ -121,7 +123,7 @@ drwxrwxr-x  7 corso corso 4096 27 apr 14:00 varcall2016
 
 ```
 
-- The ```varcall2016``` folder contains all the files that we will need for the practicals and it is subdivided in days and projects: 
+- The ```varcall2016``` folder contains all the files that we will need for the practicals and it is subdivided in days and projects:
 
 ```
 [corso@benode01 ~]$ ls -l varcall2016/
@@ -135,7 +137,7 @@ drwxr-xr-x 4 corso corso 4096 26 apr 14:03 project_2
 
 ```
 
-- Within ```students``` there is a folder with your name. **All your work should be done within this folder!** Every time check that you are in the right place. TO navigate to your folder: 
+- Within ```students``` there is a folder with your name. **All your work should be done within this folder!** Every time check that you are in the right place. TO navigate to your folder:
 
 ```
 [corso@benode01 ~]$ cd students/myname
@@ -145,7 +147,7 @@ drwxr-xr-x 4 corso corso 4096 26 apr 14:03 project_2
 
 
 
-## Working on Bender 
+## Working on Bender
 
 <div id='section-id-179'/>
 
@@ -169,7 +171,54 @@ Working in interactive mode is OK for small tasks, but if the command line we ar
 
 <div id='section-id-197'/>
 
-### 2. Submitting jobs to a job scheduler
+### 2. Permanent named sessions
+
+
+Some times programs can last for long time and we do not necessarily need to stare at the screen during all the time the program is running.  We can instead launch the program in a special shell session from which we can detach after launching. The session will keep living after we detach and until we kill it.
+
+To start this special session we will use the command ``` screen ```. You can become expert of screen reading [details](https://www.gnu.org/software/screen/manual/screen.html) of the command and learning from a [quick reference guide](http://aperiodic.net/screen/quick_reference). However for this course few commands are required.  
+
+To start a screen session:
+
+
+```
+$ screen -S name_of_the_session
+```
+
+If you forget to specify the name screen will automatically assign a number, but then you will be lost. We suggest to call the session with a reasonable name and to note down the name somewhere safe.  
+
+Once in the screen session programs can  be launched as in a fully interactive mode.
+When you are happy to leave the session use the detach command:
+
+```
+Ctrl a d
+
+```
+
+The session will keep running also if we do not see it on our screen. To re-open a session:
+
+```
+$ screen -r name_of_the_session
+
+```
+
+ If we wan to check open sessions:
+
+ ```
+ screen -ls
+
+ ```
+Finally, to kill a session (e.g. after we finished or if we decide that the program is not running well) we simply type ``` exit``` during a session:
+
+```
+$ exit
+```
+
+**Beware that ```exit``` will destroy your session**
+
+
+
+### 3. Submitting jobs to a job scheduler
 
 Bender is a shared machine, that means that many users use it at the same time, therefore it is advised and polite to use queues for running commandlines.
 
@@ -255,6 +304,3 @@ Job id            Name             User              Time Use S Queue
 165866.node001    myjobname        vcolonna          00:00:00 E parallel  
 
 ```
-
-
-
