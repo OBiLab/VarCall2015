@@ -18,7 +18,7 @@ During this practical you will
 - identify variants
 - filter variants
 
-## Data Files
+####  Data Files
 
 This practical will continue from the day3_mapping_BAM_refinement practical. We will use the final bam file created yesterday to perform the variant calling.  
 
@@ -33,7 +33,7 @@ This practical will continue from the day3_mapping_BAM_refinement practical. We 
 
 If you are starting your analyses directly from a `.bam` file created by someone else, make sure you have the same reference genome they have used for the alignment. It is essential that the contigs in the reference are the same, in number, length and ID, to those used in the `.bam` file.
 
-## Software Used:
+#### Software Used:
 
 - [Samtools / bcftools](http://samtools.sourceforge.net/samtools.shtml) are collections of utilities for manipulating sam / vcf files respectively.  
 
@@ -42,7 +42,7 @@ If you are starting your analyses directly from a `.bam` file created by someone
 - [vcflib](https://github.com/ekg/vcflib) is another set of scripts to manipulate vcf files.
 
 
-## Getting the Data
+#### Getting the Data
 
 Move to your scratch area
 ```
