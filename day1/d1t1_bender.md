@@ -180,6 +180,8 @@ Working in interactive mode is OK for small tasks, but if the command line we ar
 
 Some times programs can last for long time and we do not necessarily need to stare at the screen during all the time the program is running.  We can instead launch the program in a special shell session from which we can detach after launching. The session will keep living after we detach and until we kill it.
 
+![star](../img/star.png)
+
 To start this special session we will use the command ``` screen ```. You can become expert of screen reading [details](https://www.gnu.org/software/screen/manual/screen.html) of the command and learning from a [quick reference guide](http://aperiodic.net/screen/quick_reference). However for this course few commands are required.  
 
 To start a screen session:
@@ -194,7 +196,7 @@ If you forget to specify the name screen will automatically assign a number, but
 Once in the screen session programs can  be launched as in a fully interactive mode.
 When you are happy to leave the session use the detach command that imply pressing three keys (in order):
 
-``` Ctrl ``` -  ``` a ``` -  ``` d``` 
+``` Ctrl ``` -  ``` a ``` -  ``` d```
 
 
 The session will keep running also if we do not see it on our screen. To re-open a session:

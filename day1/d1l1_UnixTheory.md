@@ -156,6 +156,7 @@ List the files in the directory. Can you see the ``` myfile.txt ```?
 [corso@benode01]$ ls -l
 
 ```
+----
 ------
 
 ## Challenge
