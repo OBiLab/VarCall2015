@@ -96,6 +96,8 @@ You can use ```ssh``` to connect to a worker node:
 
 ```
 [corso@bender ~]$ ssh -X corso@benode01.igb.cnr.it
+Last login: Wed Apr 27 09:09:45 2016 from bender
+[corso@benode01 ~]$
 
 ```
 but to make life easier we have created a shortcut and to go to node one you only need to type:
@@ -190,12 +192,10 @@ $ screen -S name_of_the_session
 If you forget to specify the name screen will automatically assign a number, but then you will be lost. We suggest to call the session with a reasonable name and to note down the name somewhere safe.  
 
 Once in the screen session programs can  be launched as in a fully interactive mode.
-When you are happy to leave the session use the detach command:
+When you are happy to leave the session use the detach command that imply pressing three keys (in order):
 
-```
-Ctrl a d
+``` Ctrl ``` -  ``` a ``` -  ``` d``` 
 
-```
 
 The session will keep running also if we do not see it on our screen. To re-open a session:
 
