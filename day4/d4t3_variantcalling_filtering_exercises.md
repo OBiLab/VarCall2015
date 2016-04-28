@@ -30,7 +30,7 @@ Check the [GATK](https://www.broadinstitute.org/gatk/guide/tooldocs/) website to
 
 Compare the results of GATK with those of samtools using [vcftools](https://vcftools.github.io/perl_module.html#vcf-compare). Use the same final bam file you have used with samtools.
 
-If you still have time, you might want to try out two additional callers that are available on pico:
+If you still have time, you might want to try out two additional callers that are available on Bender:
 - [FreeBayes](https://github.com/ekg/freebayes#readme)
 - [VarScan2](http://dkoboldt.github.io/varscan/using-varscan.html)
 

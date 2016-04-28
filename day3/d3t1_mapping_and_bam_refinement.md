@@ -72,7 +72,7 @@ You should now be in a folder called day3 containing:
 Check your location in the file directory using the ``` pwd `` command: you should be in:
 
 ```
-/home/corso/students/yourname//day3)
+/home/corso/students/yourname/day3
 
 ```
 
@@ -128,6 +128,7 @@ java1_8 -jar /opt/bio/picard.jar CreateSequenceDictionary R=Saccharomyces_cerevi
 
 ```
 
+
 ---
 >
 >Question - Name the extensions of the files (e.g. ‘.txt’, ‘.sam’) that have been created for indices of
@@ -155,6 +156,7 @@ Align reads using `bwa mem`:
 bwa mem -M Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa lane1/s-7-1.fastq lane1/s-7-2.fastq > lane1.sam
 
 ```
+
 
 >- `-M` *Mark shorter split hits as secondary (for Picard compatibility). See [here](https://www.biostars.org/p/97323/).
 
