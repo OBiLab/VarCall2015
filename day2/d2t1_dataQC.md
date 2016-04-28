@@ -131,7 +131,9 @@ Try the ``` head ``` command which displays just the first 10 lines of a file
 >$ head paired_end1.fastq
 ```
 ---
+>
 > **Question** – There is also a Unix command called ‘tail’, given what the ‘head’ command does what do you think ‘tail’ will do? Try it on one of your data files.
+>
 ---
 Now that you have checked the fastq files are there and viewed them you can proceed with the workflow.
 
@@ -164,12 +166,15 @@ Work your way through the analysis modules on the left hand side of the **FastQC
 - Overrepresented Sequences
 
 
-**NOTE: There is a characteristic drop in quality scores of the 3’ bases of the reads (we will trim these later). The overrepresented sequences will also be removed.**
+**NOTE : There is a characteristic drop in quality scores of the 3’ bases of the reads (we will trim these later). The overrepresented sequences will also be removed.**
+
 ---
+>
 >Question – what is the total number of sequences in each of the paired end fastq files? (hint – use the basic statistics module)
 >
 >paired_end1.fastq
 >paired_end2.fastq
+>
 >Question – what type of encoding is used in the fastq files?
 >
 >
@@ -192,11 +197,19 @@ The command below will run **Trimmomatic** and remove any adapter sequence from 
 
 
 **NOTE: The Trimmomatic command is long and won’t fit on one line below, therefore it is split over multiple lines, you will notice that each line has a backslash (\) at the end of it. This is standard command line procedure to indicate that a long command is split over multiple lines and continues on the next line below. It also helps to simplify long commands, make them easier to read and find errors in.
-Note that the fourth and last line DOES NOT have a backslash at the end, this tells the terminal that this is the end of the command and to run that command when you next hit return. Where backslashes are used make sure the backslash is the last character on the line, i.e. no spaces after it. Obviously, it is not mandatory to use backslashes and divide the command in several lines, but we are doing it here for clarity. **
+Note that the fourth and last line DOES NOT have a backslash at the end, this tells the terminal that this is the end of the command and to run that command when you next hit return. Where backslashes are used make sure the backslash is the last character on the line, i.e. no spaces after it. Obviously, it is not mandatory to use backslashes and divide the command in several lines, but we are doing it here for clarity.**
 
 ```
-$ java -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile \ paired_end1.fastq paired_end2.fastq Left_paired.fastq \ Left_unpaired.fastq Right_paired.fastq Right_unpaired.fastq \ ILLUMINACLIP:TruSeq3-PE-2.fa:2:40:15 MINLEN:36
+$ java -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile \
+
+paired_end1.fastq paired_end2.fastq Left_paired.fastq \
+
+Left_unpaired.fastq Right_paired.fastq Right_unpaired.fastq \
+
+ILLUMINACLIP:TruSeq3-PE-2.fa:2:40:15 MINLEN:36
+
 ```
+
 The parameters used for **Trimmomatic** are defined as follows:
 	PE	(data is paired end)
 
