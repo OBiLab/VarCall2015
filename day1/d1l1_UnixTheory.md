@@ -71,7 +71,7 @@ Type the Unix command ```ls``` at the command prompt: what happens?
 
 The file-system is arranged in a hierarchical structure, like an inverted tree:
 
-[filesystem] (filesys.png )
+[t17](../img/t17.png )
 
 
 The top of the hierarchy is traditionally called **root**
@@ -123,7 +123,7 @@ Start the nano text editor:
 [corso@benode01]$ nano
 
 ```
-[addd image](nano.png )
+[nano](../img/nano.png )
 
 - Create a text file “myfile.txt” and save it in your home directory
 - Go to the command-line interface and type ``` ls ``` at the prompt: can you see the newly created file?
@@ -163,24 +163,40 @@ List the files in the directory. Can you see the ``` myfile.txt ```?
 ### Replace the XXX
 
 • If you've made a typo: XXX to cancel the whole line
+
 • Unix is XXX-sensitive
+
 • XXX sets the cursor at the beginning of the line
+
 • XXX sets the cursor at the end of the line
+
 • You can use up and down XXX to recall commands
+
 • The command XXX tells you where is a given program
+
 • You can use a XXX to write programs
+
 
 ### Options and arguments
 • There are commands that can take XXX
+
 • Commands may also take XXX
+
 • XXX change the behaviour of the command
+
 • XXX are the objects on which commands act
+
 • You will specify XXX using a XXX
+
 • The command name, XXX and XXX must be separated by XXX
+
 
 ### A few more questions…
 • What is command-line completion?
+
 • What is a default argument?
+
+------
 
 ## How can we run programs on Unix?
 
@@ -198,7 +214,7 @@ Prerequisites to run a program are:
 Each file (and directory) has associated access rights, which may
 be found by typing ```ls -l```
 
-[figslide34 ](figslide34)
+[t34](../img/t34.png)
 
 Access rights on directories:
 - **r** allows users to list files in the directory
@@ -230,7 +246,7 @@ The command to change access rights is [chmod](https://en.wikipedia.org/wiki/Chm
 
 Write commands in a file and make the file executable:
 
-[first](../img/fisrt.png)
+[first](../img/fisrt.png )
 
 
 >**&#!/bin/bash**
@@ -327,10 +343,12 @@ Two ways of doing it:
 sftp username@host
 ```
 
-Enter your password when prompted
-Several Unix commands do work
-get  Copy a file from the remote computer to the local computer.
-put  Copy a file from the local computer to the remote computer.
+Enter your password when prompted.
+
+Several Unix commands do work:
+
+- **get**: Copy a file from the remote computer to the local computer.
+- **put**: Copy a file from the local computer to the remote computer.
 
   ```scp ``` copies files over a secure, encrypted network connection.
 
@@ -347,3 +365,35 @@ Enter your password when prompted
 
 
 ## Non-interactive download of files from the Web
+
+```
+wget [option]... [URL]...
+
+```
+
+- Non-interactive means that it can work in the background, while the user is not logged on.
+- This allows you to start a retrieval and disconnect from the system, letting Wget finish the work.
+- By contrast, most of the Web browsers require constant user's presence, which can be a great hindrance when transferring a lot of data.
+
+
+## Listing files and directories
+
+[tab47](../img/t47.png )
+
+### The directories ‘.’, ‘..’, and ‘~’
+
+```
+$ ls -a [Enter]
+$ cd . [Enter]
+$ cd .. [Enter]
+$ ls ~/oeiras
+
+```
+
+## Handling files and directories
+[tab48](../img/t48.png)
+
+```more``` ,  ```less```,  ```clear```
+
+## Redirection
+[tab49](../img/t49.png)
