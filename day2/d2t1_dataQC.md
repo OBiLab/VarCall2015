@@ -173,6 +173,7 @@ Work your way through the analysis modules on the left hand side of the **FastQC
 >Question – what is the total number of sequences in each of the paired end fastq files? (hint – use the basic statistics module)
 >
 >paired_end1.fastq
+>
 >paired_end2.fastq
 >
 >Question – what type of encoding is used in the fastq files?
@@ -248,7 +249,7 @@ MINLEN:36                         (delete reads trimmed below length MINLEN)
 
 ----
 
-**NOTE:  Remember that **Trimmomatic** only deletes reads if the length after trimming of adapter sequences is less than MINLEN (which we set to 36bp).**
+**NOTE:  Remember that Trimmomatic only deletes reads if the length after trimming of adapter sequences is less than MINLEN (which we set to 36bp).**
 
 
 
@@ -265,7 +266,7 @@ $ java -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile2 Left_pair
 
 The parameters used for **Trimmomatic** are defined as follows:
 
-	PE	(data is paired end)
+PE	(data is paired end)
 
 -phred33                            (Quality scores are 33 offset)
 
@@ -290,7 +291,10 @@ TRAILING:3                       (Trim 3’ bases with quality score < 3)
 SLIDINGWINDOW:4:15     (see manual for explanation)
 
 MINLEN:36                        (delete reads trimmed below length MINLEN)
-–-
+
+
+---
+>
 >Question – According to the **Trimmomatic** screen output, what is the number and percentage of read pairs that ‘both survived’ low quality base trimming?
 
 >Number
@@ -299,6 +303,7 @@ MINLEN:36                        (delete reads trimmed below length MINLEN)
 
 
 >Given that the adapter trimmed fastq files contained 2165674 reads, how many pairs of reads have been trimmed and then deleted by **Trimmomatic** in this step?
+>
 ---
 
 
@@ -308,8 +313,10 @@ MINLEN:36                        (delete reads trimmed below length MINLEN)
 Use **FastQC** to open the trimmed fastq files.
 Go through the analysis modules on the left hand side to see what has changed compared to the original fastq files.
 
-–
+---
+>
 >Question – What are the main changes you see in the read quality?
+>
 ---
 
 **Well done……you have successfully QC’d and pre-processed a set of paired end read files!**
