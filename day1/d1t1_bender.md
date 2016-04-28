@@ -16,7 +16,8 @@ time:
     - [FILE SYSTEM](#section-id-156)
   - [Working on Bender](#section-id-177)
     - [1. Interactive mode](#section-id-179)
-    - [2. Submitting jobs to a job scheduler](#section-id-197)
+    - [2. Permanent named sessions](#section-id-333)
+    - [3. Submitting jobs to a job scheduler](#section-id-197)
       - [a) Preparing the PBS script](#section-id-211)
       - [b) Submitting the job to PBS](#section-id-249)
       - [c) Checking the job status](#section-id-256)
@@ -170,6 +171,7 @@ Working in interactive mode is OK for small tasks, but if the command line we ar
 
 
 <div id='section-id-197'/>
+<div id='section-id-333'/>
 
 ### 2. Permanent named sessions
 
@@ -216,7 +218,7 @@ $ exit
 
 **Beware that ```exit``` will destroy your session**
 
-
+<div id='section-id-333'/>
 
 ### 3. Submitting jobs to a job scheduler
 
