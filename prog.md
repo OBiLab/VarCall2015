@@ -1,4 +1,4 @@
-| DAY 1         |Sharpening your pencils* (main tutors: Allegra Via and Vincenza Colonna)*          
+| DAY 1         |Sharpening your pencils *(main tutors: Allegra Via and Vincenza Colonna)*          
 | ------------- |-------------| -----|
 | 09:30    | Welcome session: Introduction to the course, participants and instructors |  
 |10:30|  Lecture and practicals: connection to cluster and file transfer|
