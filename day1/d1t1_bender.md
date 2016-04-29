@@ -207,7 +207,7 @@ The session will keep running also if we do not see it on our screen. To re-open
 $ screen -r name_of_the_session
 
 ```
-Once you are in a scrren session **all will look the same!**. 
+Once you are in a scrren session **all will look the same!**.
 
 
 If you want to check open sessions:
@@ -215,13 +215,13 @@ If you want to check open sessions:
  ```
 $ screen -ls
 There are screens on:
-	11292.a_user_job1	
+	11292.a_user_job1
 	11790.a_user_job2	(Detach(Detached)ed)
 2 Sockets in /var/run/screen/S-corso.
 
  ```
-This means that there are two screen sessions opened. ``` 11292.a_user_job1 ``` is the name of one of them. 
-The ``` (Detached) ```  feature says that you are in none of the exsisting screens. 
+This means that there are two screen sessions opened. ``` 11292.a_user_job1 ``` is the name of one of them.
+The ``` (Detached) ```  feature says that you are in none of the exsisting screens.
 
 
 
@@ -230,7 +230,9 @@ Finally, to kill a session (e.g. after we finished or if we decide that the prog
 ```
 $ exit
 ```
-It is necessary to be in the session to kill it
+It is necessary to be in the session to kill it.
+
+![danger](../img/danger_screen.png)
 
 **Beware that ```exit``` will destroy your session**
 
