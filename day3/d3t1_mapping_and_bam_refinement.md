@@ -301,8 +301,11 @@ Remove duplicates using picard `MarkDuplicates`:
 java1_8 -jar /opt/bio/picard.jar MarkDuplicates INPUT=library_RG_sorted_lr.bam OUTPUT=library_final.bam METRICS_FILE=dupl_metrics.txt
 ```
 
-**Sort and index library_final.bam file**
-
+---
+>
+>Sort and index library_final.bam file**
+>
+----
 
 
 ## BAM QC
