@@ -65,7 +65,7 @@ cd day4
 
 ## VARIANT CALLING
 
-Once the alignments have been refined, snp and indel differences between the data and reference genome can be identified and qualified. Both GATK and samtools are popular softwares to carry out this analysis. Here we will use samtools mpileup.
+Once the alignments have been refined, snp and indel differences between the data and reference genome can be identified and qualified. Both [GATK](https://www.broadinstitute.org/gatk/), [Freebayes](https://github.com/ekg/freebayes) and [samtools](http://samtools.sourceforge.net/) are popular softwares to carry out this analysis. Here we will use samtools mpileup.
 ```
 samtools mpileup -u -Q 20 -q 50 -g -s -f ../day3/Saccharomyces_cerevisiae.EF4.68.dna.toplevel.fa library_final_sorted.bam | bcftools call -mv > variants_raw.vcf
 
