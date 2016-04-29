@@ -52,7 +52,8 @@ A command is generally the name of the software to be used followed by a list of
 **NOTE: Please be aware of spaces between text in commands as they are important!**
 
 
-At certain points during this practical questions will be asked and a blank space left for you to fill in your answers. Questions are written in green text.
+At certain points during this practical questions will be asked and a blank space left for you to fill in your answers. 
+
 ## Step1: Copy and check the data files
 
 The data we will be using today comes from a [publication](http://goo.gl/dcKbB) where they used next generation sequencing to investigate population genetics of *Vibrio cholera*, following a cholera outbreak in the aftermath of the Haitian earthquake in 2010. The accession number for the complete data set is SRA039806, with the paired end data files having the accession number SRR308665.
@@ -84,7 +85,7 @@ The command ``` pwd ``` which stands for ‘print working directory’ will tell
 In my case the output from the ``` pwd ``` command is:
 
 ```
-/home/corso/chiara/
+/home/corso/students/yourname/
 ```
 In order to keep things tidy in your directory it is good practise to create separate folders for the different exercises. We will now create a **``` Data_QC ```** folder in scratch directory then use the command ``` cp ``` (copy) to copy the files into it.
 
@@ -244,6 +245,7 @@ MINLEN:36                         (delete reads trimmed below length MINLEN)
 >Question – According to the **Trimmomatic** screen output, what is the number and percentage of read pairs that ‘both survived’ adapter trimming?
 
 >Number
+>
 >Percentage
 
 
@@ -252,8 +254,6 @@ MINLEN:36                         (delete reads trimmed below length MINLEN)
 ----
 
 **NOTE:  Remember that Trimmomatic only deletes reads if the length after trimming of adapter sequences is less than MINLEN (which we set to 36bp).**
-
-
 
 
 
