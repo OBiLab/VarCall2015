@@ -239,12 +239,16 @@ java -jar /cineca/prod/applications/picard/1.119/binary/bin/AddOrReplaceReadGrou
 
 ![read](../img/redgroup.png)
 
-## Sort and index the merged bam file with read groups
-
+---
+>
+>Sort and index the merged bam file with read groups
+>
+---
+
 ## BAM refinement – local realignment and duplicate removal
 
 
-### Local alignment with GATK
+### Local realignment with GATK
 
 Indels in the data that are not present in the reference genome can cause small mis-alignments at the end of the reads. GATK’s local re-alignment identifies the areas characterized by a high number of mis-matching bases and realigns the reads around it.
 
