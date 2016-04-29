@@ -46,7 +46,7 @@ Characteristics of the experiment:
 Move to your directory:
 
 ```
-cd your_directory
+cd students/yourname
 [corso@benode01 chiara]$
 
 ```
