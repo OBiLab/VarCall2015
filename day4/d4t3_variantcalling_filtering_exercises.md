@@ -30,9 +30,7 @@ Check the [GATK](https://www.broadinstitute.org/gatk/guide/tooldocs/) website to
 
 Compare the results of GATK with those of samtools using [vcftools](https://vcftools.github.io/perl_module.html#vcf-compare). Use the same final bam file you have used with samtools.
 
-If you still have time, you might want to try out two additional callers that are available on Bender:
-- [FreeBayes](https://github.com/ekg/freebayes#readme)
-- [VarScan2](http://dkoboldt.github.io/varscan/using-varscan.html)
+If you still have time, you might want to try one additional callers that are available on Bender, [FreeBayes](https://github.com/ekg/freebayes#readme) and then use vcftools to [compare](https://vcftools.github.io/perl_module.html#vcf-compare) with the vcf obtained previously.  
 
 ## Practical 2 – apply a set of filters to your final vcf
 
@@ -42,8 +40,7 @@ Start with this list of filters. Think about the order in which you should use t
 
 - Filter indels out – better doing this during the variant calling (like we did with BQ and MQ) or after on the vcf file?
 - DP
-- Filter out monomorphic sites – why could they be there? They can…
-- Check --max-mac option in vcftools to filter them out
+- Filter out monomorphic sites – why could they be there? They can…  Check ```--max-mac`` option in vcftools to filter them out
 - SnpGap
 - Proximity to Indels
 - Anything else you think is important among the filters available in vcf-annotate?
