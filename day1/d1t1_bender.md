@@ -198,6 +198,8 @@ When you are happy to leave the session use the detach command that imply pressi
 
 ``` Ctrl ``` -  ``` a ``` -  ``` d```
 
+**Use ``` Ctrl ``` -  ``` a ``` -  ``` d``` to  check if you are in the screen session or not**
+
 
 The session will keep running also if we do not see it on our screen. To re-open a session:
 
@@ -205,18 +207,30 @@ The session will keep running also if we do not see it on our screen. To re-open
 $ screen -r name_of_the_session
 
 ```
+Once you are in a scrren session **all will look the same!**. 
 
- If we wan to check open sessions:
+
+If you want to check open sessions:
 
  ```
- screen -ls
+$ screen -ls
+There are screens on:
+	11292.a_user_job1	
+	11790.a_user_job2	(Detach(Detached)ed)
+2 Sockets in /var/run/screen/S-corso.
 
  ```
+This means that there are two screen sessions opened. ``` 11292.a_user_job1 ``` is the name of one of them. 
+The ``` (Detached) ```  feature says that you are in none of the exsisting screens. 
+
+
+
 Finally, to kill a session (e.g. after we finished or if we decide that the program is not running well) we simply type ``` exit``` during a session:
 
 ```
 $ exit
 ```
+It is necessary to be in the session to kill it
 
 **Beware that ```exit``` will destroy your session**
 
