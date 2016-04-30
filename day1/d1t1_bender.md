@@ -33,7 +33,7 @@ time:
 
 We will be hosted for this course on a machine named Bender. This machine is on the top floor in this building and has all the software we need installed and tested.
 
-To use remote machine the first step is to get connected to them and one protocol for connection is called [**Secure Shell**](https://en.wikipedia.org/wiki/Secure_Shell) or **SSH**.
+To use a remote machine the first step is to get connected to it. One protocol for connection is called [**Secure Shell**](https://en.wikipedia.org/wiki/Secure_Shell) or **SSH**.
 ![bender](../img/benderssh.png)
 Before using the remote machine you should have talked to the machine administrator that will create an account for you with a username and a password. Once you obtain an account,  you can use SSH from your terminal. The basic instruction for connection is the command ```ssh``` followed by the username and the [IP address](https://en.wikipedia.org/wiki/IP_address) of the machine. Some times to  simplify we use a literal synonim of the IP address:
 
