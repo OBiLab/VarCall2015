@@ -18,7 +18,7 @@ This repository is for the course materials and it is organized as follows:
 
 Days |Lessons | Tutorials
 ------------ | -------------| -----------
-day 1 | [Unix/Linux command line](day1/d1l1_UnixTheory.md), [Basic R]() and [NGS and Population Genomics](day1/d1l2_NGSPopGen.pdf)| [Connection to remote server](day1/d1t1_bender.md), [Practical Unix](day1/Academis_Linux.pdf) and [R]()
+day 1 | [Unix/Linux command line](day1/d1l1_Unix-Theory-VarCall2016.pdf), [Basic R]() and [NGS and Population Genomics](day1/d1l2_NGSPopGen.pdf)| [Connection to remote server](day1/d1t1_bender.md), [Practical Unix](day1/Academis_Linux.pdf) and [R]()
 day 2 |[NGS platforms](day2/d2l1_IntroNGS.pdf) and  [Data format an Quality Control](day2/d2l2_DataFormatQC.pdf)| [Data QC](day2/d2t1_dataQC.md)
 day 3 |[Mapping and BAM refinement](day3/d3l1_mapping_BAM_refinement.pdf)| [Mapping](day3/d3t1_mapping_and_bam_refinement.md)|
 day 4 | [Variant Calling](day4/d4l1_SNP_call.pdf)|[SNP calling](day4/d4t1_variantcalling_snps_tutorial.md), [SV calling](day4/d4t2_variantcalling_stucturalvariants_tutorial.md) and [Filtering](day4/d4t3_variantcalling_filtering_exercises.md)
