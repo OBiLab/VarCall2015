@@ -25,6 +25,7 @@ time:
         - [3.1 Convert  in  files](#section-id-117)
         - [3.2 Generate  file (BEAUti)](#section-id-185)
     - [3.4 Run BEAST](#section-id-228)
+        - [Submitting a job with screen](#section-id-444)
         - [Submit a job to job scheduler](#section-id-241)
     - [3.5 Run Tracer](#section-id-275)
     - [5. Interpret the output and prepare a report](#section-id-284)
@@ -111,7 +112,7 @@ thicker colored lines are the median for Ne and the thinner grey lines represent
 For this project we will use a graphical interface, therefore remember to ssh using the `-X` (capital X!) option that will enable the use of the graphical interface
 
 ```
-ssh -X  user@cluster.it
+ssh -X corso@bender.igb.cnr.it
 ```
 
 <div id='section-id-96'/>
@@ -120,9 +121,9 @@ ssh -X  user@cluster.it
 
 The Fastq files we will use here were extracted from a custom enrichment experiment. Agilent SureSelect was used to capture 26Mb of the human genome, and paired-end libraries were run on a HiSeq 2000 sequencer with 100bp read length (Hallast et al, 2015).
 
-`.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/fastq`
+`.fastq` files are in this folder:  `/home/corso/varcall2016/project_2/fastq`
 
-The  `.bam` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_2/bamfiles`
+If you have problems  with processig fastq files we have `.bam` files ready, so no panic!
 
 
 
@@ -228,8 +229,6 @@ To generate the input  `.xml` file for BEAST  we will use a routine of BEAST cal
 We will use the BEAUti graphical interface although we will launch it on the PICO cluster. To launch BEAUti we should first load BEAST, as BEAUti is part of it.
 
 ```
-module load profile/advanced
-module load autoload beast
 beauti
 ```
 >**Note** that the  the **module load** instructions apply specifically to this cluster. Other machines might have a different way to launch BEAST/BEAUti
@@ -280,7 +279,34 @@ We will use the `-working` options to have the output
 beast -working  myfile.xml
 ```
 
+<div id='section-id-444'/>
+##### Submitting a job with screen
+
+Remember to start a screen session:
+
+```
+$ screen -S name_of_the_session
+```
+**Choose a meaningful name for your  session and note its name!!**
+
+Launch the command line in the screen session  and when you are happy to leave the session use the detach command to quit the session without closing it:
+
+` Ctrl ` -   ` a ` -  ` d`
+
+
+Check if your session is running:
+
+```
+$ screen -ls
+```
+And  if you want to access it again:
+
+```
+$ screen -r name_of_the_session
+
+```
 <div id='section-id-241'/>
+
 
 #####  Submit a job to job scheduler  
 
@@ -298,9 +324,6 @@ The PBS script will look like:
 #PBS -l nodes=1:ppn=1
 #PBS -o /absolutepath/outerr/runbeast.out
 #PBS -e /absolutepath/outerr/runbeast.err
-
-cd /myworkingdir
-module load autoload beast
 
 beast -working  myfile.xml
 

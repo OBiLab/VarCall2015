@@ -232,6 +232,9 @@ $ exit
 ```
 It is necessary to be in the session to kill it.
 
+It is not possible to kill a session while a process is running, if you want to kill a session first kill the process (very always with `Ctr`-`c`)
+
+
 ![danger](../img/danger_screen.png)
 
 **Beware that ```exit``` will destroy your session**

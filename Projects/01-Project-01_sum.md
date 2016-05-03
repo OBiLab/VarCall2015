@@ -22,6 +22,7 @@ time:
     - [2. Process the NGS data](#section-id-97)
     - [3. Prepare input files for ADMIXTURE](#section-id-101)
         - [3.1 Convert  in PLINK style files](#section-id-112)
+        - [Submitting a job with screen](#section-id-444)
         - [Submit a job to job scheduler](#section-id-148)
         - [3.2 Generate PLINK  file](#section-id-198)
         - [3.3 Prune to reduce number of markers](#section-id-261)
@@ -98,13 +99,12 @@ The NGS tasks are not described in detail in order to stimulate the discussion i
 
 The Fastq files we will use here are publicly available at the [1000 Genomes ftp site](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/).
 
-A selected subset of `.fastq` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_1/fastq`
+A selected subset of `.fastq` files are in this folder:  `/home/corso/varcall2016/project_1/fastq_ord`
 
 
-The  `.bam` files are in this folder:  `/pico/scratch/userexternal/vcolonna/project_1/bamfiles`
+If you have problems  with processig fastq files we have `.bam` files ready, so no panic!
 
-
-Copy in your personal data directory the ones you will work with  using the shell  `cp` command
+**Copy in your personal/group data directory the ones you will work with  using the shell  `cp` command**
 
 
 <div id='section-id-97'/>
@@ -133,17 +133,13 @@ It is very common that a software uses the format of other softwares. In this ca
 #####  3.1 Convert `.vcf` in PLINK style files
 
 To generate the input file we  will use the `--plink` option of [VCFtools](https://vcftools.github.io/index.html) that converts `.vcf.gz` files in [PLINK `.ped`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#ped) and [PLINK `.map`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#map)
-files:  
-
+files. Below are shown command lines for a toy vcf that you cna find in the Project_1 folder:
 
 ```
-module load profile/advanced
-module load vcftools
 
 vcftools --gzvcf  tiny.vcf.gz  --plink --out tiny
 
 ```
-> *note that the `module load` instruction is specific to the machine we are using*
 
 > - `--gzvcf`  *specifies the vcf file path*
 > - `--plink`  *indicates that we want to generate PLINK style files*
@@ -165,14 +161,41 @@ ls -l
 >- `.ped` *contains the genotypes*
 
 
+<div id='section-id-444'/>
+##### Submitting a job with screen
+
+Remember to start a screen session:
+
+```
+$ screen -S name_of_the_session
+```
+**Choose a meaningful name for your  session and note its name!!**
+
+Launch the command line in the screen session  and when you are happy to leave the session use the detach command to quit the session without closing it:
+
+` Ctrl ` -   ` a ` -  ` d`
+
+
+Check if your session is running:
+
+```
+$ screen -ls
+```
+And  if you want to access it again:
+
+```
+$ screen -r name_of_the_session
+
+```
+
 
 <div id='section-id-148'/>
 
-#####  Submit a job to job scheduler  
+#####  Submitting  a job to job scheduler  
 
 If we are using a very small file, the command line described above can be very fast and run interactively. However in reality files are large and we might want to submit jobs instead.
 
-If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](../00-beforewestart.md) to run jobs with PBS.
+If we are using a machine with a [PBS](https://en.wikipedia.org/wiki/Portable_Batch_System) job scheduler we might want to embed the command line in a PBS script as described in the [instructions](00-projects.md) to run jobs with PBS.
 
 The PBS script will look like:
 
@@ -185,10 +208,6 @@ The PBS script will look like:
 #PBS -l pvmem=8gb
 #PBS -A try15_elixir
 #PBS -N vcf2plink
-
-
-module load profile/advanced
-module load vcftools
 
 vcftools --gzvcf /absolutepath/data/tiny.vcf.gz  --plink --out /absolutepath/tiny
 
@@ -227,14 +246,10 @@ Let's first clarify that the PLINK `.bed` file is not the [UCSC/ENSEMBL `.bed`](
 To generate a PLINK `.bed` file we use the PLINK option [`--make-bed`](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml#bed)
 
 ```
-module load profile/advanced
-module load gnu/4.8.3
-module load plink
-
 plink  --file data/tiny --make-bed --noweb  --out data/tiny_a
 
 ```
-> *note that the `module load` instruction is specific to the machine we are using, and the `module load gnu/4.8.3`  is a prerequisite of loading PLINK*
+
 
 > -  `--file` *is the option for specifying the  input file. __Note__ that there is no extension: this is a feature of plink.*
 > - `--make-bed` *is the option for generating bed files*
@@ -242,7 +257,10 @@ plink  --file data/tiny --make-bed --noweb  --out data/tiny_a
 > -  `--out`  *specifies the path and names (only prefix, extension will be add by PLINK) of the output files. __Note__ that we keep a similar name with an extension.*
 
 
-As usual, rather than running the command line interactively we might want to embed the command line in a bash script and submit a job.
+As usual, rather than running the command line interactively we want to use screen (see above or in Day1 material)
+
+
+Alternatively,  we might want to embed the command line in a bash script and submit a job.
 
 ```
 #!/bin/bash
@@ -253,20 +271,11 @@ As usual, rather than running the command line interactively we might want to em
 #PBS -A try15_elixir
 #PBS -N plink2bed
 
-
-module load profile/advanced
-module load gnu/4.8.3
-module load plink
-
-
 plink  --file /absolutepath/tiny  --make-bed --noweb  --out /absolutepath/tiny_a
 
 ```
 
-
-
-
-If the job is successful we will see five new files in our data directory:
+If the process is successful we will see five new files in our data directory:
 
 ```
 ls
@@ -293,11 +302,6 @@ Usually 10-100k markers are required for a proper ADMIXTURE analysis, whereas if
 If you take some time to read how [here](http://pngu.mgh.harvard.edu/~purcell/plink/summary.shtml#prune), you will figure out that you need a command line like this:
 
 ```
-module load profile/advanced
-module load gnu/4.8.3
-module load plink
-
-
 plink  --file data/tiny  --noweb  --indep 100 10 2  --out data/tiny_b
 ```
 > - `--indep 1000 10 2` *prunes based on the variance inflation factor (VIF), which recursively removes SNPs within a sliding window. The parameters for --indep are: window size in SNPs (e.g. 50), the number of SNPs to shift the window at each step (e.g. 5), the VIF threshold. The VIF is 1/(1-R^2) where R^2 is the multiple correlation coefficient for a SNP being regressed on all other SNPs simultaneously. That is, this considers the correlations between SNPs but also between linear combinations of SNPs. A VIF of 10 is often taken to represent near collinearity problems in standard multiple regression analyses (i.e. implies R^2 of 0.9). A VIF of 1 would imply that the SNP is completely independent of all other SNPs. Practically, values between 1.5 and 2 should probably be used; particularly in small samples, if this threshold is too low and/or the window size is too large, too many SNPs may be removed*
@@ -365,9 +369,6 @@ you should have the associated `.bim` (binary marker information file) and
 Once we are sure about this let's run the ADMIXTURE command line (or [embed it in a script](#sec3.3.1) to be submitted to a job scheduler):
 
 ```
-module load profile/advanced
-module load admixture
-
 admixture  tiny_c.bed 2
 ```
 > ADMIXTURE takes as input only two parameters: the path to the input file and the number of clusters (K) in which  we believe our population is subdivided, in this case K=2
@@ -388,8 +389,11 @@ ls
 Note that the output file names have '2' in them.  This indicates the number of populations (K) that was assumed for the analysis.
 
 
-Beside these two files the other important information is in  the standard out and the standard error. If you run ADMIXTURE interactively  you will have the content of these files displayed on the terminal, however it is really unlikely that you will run the analyses interactively.
-Therefore,  when using a PBS script make sure to give reasonable names to the standard out (e.g. .K.log) and the standard error. For instance:
+Beside these two files the other important information is in  the standard out and the standard error. If you run ADMIXTURE interactively  you will have the content of these files displayed on the terminal, however it is really unlikely that you will run the analyses interactively. As usual you might want to use screen.
+
+
+
+If you are using a PBS script make sure to give reasonable names to the standard out (e.g. .K.log) and the standard error. For instance:
 
 ```
 #!/bin/bash
@@ -400,10 +404,6 @@ Therefore,  when using a PBS script make sure to give reasonable names to the st
 #PBS -e /absolutepath/outerr/admix.2.err
 
 cd /absolutepath  # without this info you will receive an  error message saying that the `bed` associated `bim` file is not found   
-
-module load profile/advanced
-module load admixture
-
 admixture  /absolutepath/tiny_c.bed 2
 
 ```
