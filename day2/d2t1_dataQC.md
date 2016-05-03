@@ -204,7 +204,7 @@ The command below will run **Trimmomatic** and remove any adapter sequence from 
 Note that the fourth and last line DOES NOT have a backslash at the end, this tells the terminal that this is the end of the command and to run that command when you next hit return. Where backslashes are used make sure the backslash is the last character on the line, i.e. no spaces after it. Obviously, it is not mandatory to use backslashes and divide the command in several lines, but we are doing it here for clarity.**
 
 ```
-$ java -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile \
+$ java1_8 -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile \
 
 paired_end1.fastq paired_end2.fastq Left_paired.fastq \
 
@@ -263,7 +263,7 @@ MINLEN:36                         (delete reads trimmed below length MINLEN)
 
 The **FastQC** ‘Per Base Sequence Quality’ and ‘Per Sequence Quality Scores’ modules have already told us that there could be some issues with the quality scores of the last few bases of the reads. We also know from the presentation that the quality of 3’ bases of sequence reads does tend to decrease. We will use **Trimmomatic** to trim poor quality bases from the 3’ end of the reads. **Trimmomatic** also checks the 5’end for poor quality bases. The command below will carry out the trimming on the adapter trimmed fastq files we created above.
 ```
-$ java -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile2 Left_paired.fastq Right_paired.fastq Left_trim_paired.fastq Left_trim_unpaired.fastq Right_trim_paired.fastq Right_trim_unpaired.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+$ java1_8 -jar /opt/bio/**Trimmomatic**.jar PE -phred33 -trimlog logfile2 Left_paired.fastq Right_paired.fastq Left_trim_paired.fastq Left_trim_unpaired.fastq Right_trim_paired.fastq Right_trim_unpaired.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 
 The parameters used for **Trimmomatic** are defined as follows:
