@@ -169,7 +169,7 @@ Remember to start a screen session:
 ```
 $ screen -S name_of_the_session
 ```
-**Choose a meaningful name for your  session and note its name!!**
+>*Choose a meaningful name for your  session and note its name!!*
 
 Launch the command line in the screen session  and when you are happy to leave the session use the detach command to quit the session without closing it:
 
@@ -408,7 +408,7 @@ admixture  /absolutepath/tiny_c.bed 2
 
 ```
 
-This set up will produce three files in your data folder:
+ADMIXTURE will produce three files in your data folder:
 
 ```
 ls

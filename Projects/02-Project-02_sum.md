@@ -157,7 +157,9 @@ Take some time to familiarize with the file formats. In our case we will go thro
 
 Our first step is to convert the `.vcf` in `fasta`. As usual there are several ways to do this, among which the useful [PDGSpider](http://www.cmpg.unibe.ch/software/PGDSpider/).
 
-You should install PDGSpider on your workspace in few steps. First download the file using the shell command [`wget`](https://www.gnu.org/software/wget/manual/wget.html)
+You should have already installed PDGSpider on yourlocal machine. If not below instructions in few steps.
+
+First download the file using the shell command [`wget`](https://www.gnu.org/software/wget/manual/wget.html)
 
 
 ```
@@ -287,7 +289,7 @@ Remember to start a screen session:
 ```
 $ screen -S name_of_the_session
 ```
-**Choose a meaningful name for your  session and note its name!!**
+>*Choose a meaningful name for your  session and note its name!!*
 
 Launch the command line in the screen session  and when you are happy to leave the session use the detach command to quit the session without closing it:
 
@@ -328,7 +330,7 @@ The PBS script will look like:
 beast -working  myfile.xml
 
 ```
-This PBS  will produce two files:
+Once run, BEAST will produce two files:
 
 ```
 ls
