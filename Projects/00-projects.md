@@ -113,17 +113,16 @@ as you can see we combined several processes using the pipe ` | ` and substituti
 ![pipe](../img/pipe.png)
 
 
-**Note
-1) we use absolute paths
-
-2) because we use absolute paths we don't copy fastq in our folders but we refer to them where they are on the machine**
+#### Note
+#### 1) we use absolute paths
+#### 2) because we use absolute paths we don't copy fastq in our folders but we refer to them where they are on the machine
 
 
 To make a loop we first need a list on which to loop. You will find the list of individuals in the project folder under the name ` individuals.txt ` . Following basic bash loop structure we shall write:
 
 ```
-for  i in $(cat )
-
-bwa mem -t 8 -R '@RG\tID:HG00149\tSM:HG00149' /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/HG00149.R1.fastq /home/corso/varcall2016/project_1/fastq/HG00149.R2.fastq | samtools view -b - | samtools sort -  NA21102.sorted
-
+for i in $(cat /home/corso/varcall2016/project_1/individuals.txt ); do  bwa mem -t 8 -R '@RG\tID:$i\tSM:$i' /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/$i.R1.fastq /home/corso/varcall2016/project_1/fastq/$i.R2.fastq | samtools view -b - | samtools sort - $i.sorted  ; done
 ```
+
+
+![pipe](../img/loop.png)
