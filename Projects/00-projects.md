@@ -125,4 +125,4 @@ for i in $(cat /home/corso/varcall2016/project_1/individuals.txt ); do  bwa mem 
 ```
 
 
-![pipe](../img/loop.png)
+![pipe](../img/lollo.png)
