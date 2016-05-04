@@ -228,13 +228,13 @@ lane2_sorted.bam.bai
 
 Merge BAMs per library using picard MergeSamFiles
 ```
-java -jar /cineca/prod/applications/picard/1.119/binary/bin/MergeSamFiles.jar INPUT=lane1_sorted.bam INPUT=lane2_sorted.bam OUTPUT=library.bam
+java1_8 -jar /opt/bio/picard.jar MergeSamFiles  INPUT=lane1_sorted.bam INPUT=lane2_sorted.bam OUTPUT=library.bam
 ```
 
 
 Add read group header using picard AddOrReplaceReadGroups (please keep in mind that there is a way to do this during the alignment with bwa with the option `-R`)
 ```
-java -jar /cineca/prod/applications/picard/1.119/binary/bin/AddOrReplaceReadGroups.jar INPUT=library.bam OUTPUT=library_RG.bam RGID=1 RGLB=library RGPL=Illumina RGPU=lane1_2 RGSM=yeast
+java1_8 -jar /opt/bio/picard.jar AddOrReplaceReadGroups INPUT=library.bam OUTPUT=library_RG.bam RGID=1 RGLB=library RGPL=Illumina RGPU=lane1_2 RGSM=yeast
 ```
 
 ![read](../img/redgroup.png)
