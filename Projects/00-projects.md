@@ -100,7 +100,7 @@ totale 8,0G
 ## Looped command lines
 
 
-### bwa alignment
+### bwa alignment, sam to bam and bam sorting 
 
 This would be the command line for a single individual (HG00149):
 
