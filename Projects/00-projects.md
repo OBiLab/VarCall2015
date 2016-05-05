@@ -100,7 +100,7 @@ totale 8,0G
 ## Looped command lines
 
 
-### bwa alignment, sam to bam and bam sorting 
+### bwa alignment, sam to bam and bam sorting
 
 This would be the command line for a single individual (HG00149):
 
@@ -110,7 +110,7 @@ bwa mem -t 8 -R '@RG\tID:HG00149\tSM:HG00149' /home/corso/varcall2016/ref_b37/hu
 ```
 as you can see we combined several processes using the pipe ` | ` and substituting the name of the input file with the standard in ` - `.
 
-![pipe](../img/pipe.png)
+![pipe](../img/pipp.png)
 
 
 #### Note
