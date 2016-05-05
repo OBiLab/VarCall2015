@@ -96,7 +96,7 @@ totale 8,0G
 
 ## Loops
 
-
+![loop](../img/Loop-icon.png)
 ## Looped command lines
 
 
