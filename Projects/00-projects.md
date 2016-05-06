@@ -12,6 +12,10 @@ time:
     - [Ask U.G.O.](#section-id-25)
   - [How to](#section-id-278)
 - [Where is the data?](#section-id-888)
+- [Loops and Pipes](#section-id-888)
+- [`bgzip` and `tabix`](#section-id-999)
+- [VCF manipulation](#section-id-222)
+
 
 <div id='section-id-9'/>
 
@@ -94,6 +98,7 @@ totale 8,0G
 
 ```
 
+<div id='section-id-888'/>
 ## Loops and Pipes
 
 Trough the tutorials we have learned to do operations step by step and sample by sample. We will now learn how to combine all operations in a single step. We will show as an example a [loop in bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-7.html), however loops can be done in any programming language.  
@@ -145,7 +150,7 @@ for i in $(cat individuals.txt); do  bwa mem /home/corso/varcall2016/ref_b37/hum
 For project 1 you will find the list of individuals in the project folder under the name ` individuals.txt `
 
 
-
+<div id='section-id-999'/>
 ## `bgzip` and `tabix`
 (adapted from [here](https://github.com/ekg/alignment-and-variant-calling-tutorial#aligning-our-data-against-the-e-coli-k12-reference))
 
@@ -170,7 +175,7 @@ tabix -h SRR1770413.vcf.gz NC_000913.3:1000000-1500000 | vcffilter ...
 
 The bgzip format is very similar to that used in BAM, and the indexing scheme is also similar (blocks of compressed data which we build a chromosome position index on top of).
 
-
+<div id='section-id-222'/>
 ## VCF manipulation
 
 There are many tools for `.vcf`  file manipulation. Some of the features overlap among tools  and some other are very specific:
@@ -179,4 +184,4 @@ There are many tools for `.vcf`  file manipulation. Some of the features overlap
 - [Vcflib](https://github.com/ekg/vcflib)
 - [bcftools](https://samtools.github.io/bcftools/bcftools.html)
 
-Rather than going trough all of them we will make one example using `[vcf2tsv]`(https://github.com/vcflib/vcflib#vcf2tsv) form **vcflib**.  This command converts the INFO  field of the `.vcf` into a tab-delimited  file that can be imported in R  for making plots. 
+Rather than going trough all of them we will make one example using `[vcf2tsv]`(https://github.com/vcflib/vcflib#vcf2tsv) form **vcflib**.  This command converts the INFO  field of the `.vcf` into a tab-delimited  file that can be imported in R  for making plots.
