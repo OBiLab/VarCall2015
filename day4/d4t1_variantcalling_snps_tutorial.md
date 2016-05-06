@@ -107,7 +107,7 @@ Filters applied:
 - d=2: minimum coverage 2
 - w=10: minimum distance from a gap
 
-module load vcftools
+
 ```
 cat variants_raw.vcf | vcf-annotate -f d=2/w=10 > variants_flt.vcf
 

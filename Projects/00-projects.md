@@ -94,23 +94,29 @@ totale 8,0G
 
 ```
 
-## Loops
+## Loops and Pipes
 
-![loop](../img/Loop-icon.png)
-## Looped command lines
+Trough the tutorials we have learned to do operations step by step and sample by sample. We will now learn how to combine all operations in a single step. We will show as an example a [loop in bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-7.html), however loops can be done in any programming language.  
 
+![loop](../img/repeat_loop.png)
 
 ### bwa alignment, sam to bam and bam sorting
 
-This would be the command line for a single individual (HG00149):
+As an example let's consider three operations that we would do step by step: every step produces an output that become the input of the next step:  
+
+![loop1](../img/loop1.png)
+
+
+We can combine all the three steps and write a single command for every single individual (in this case HG00149):
 
 ```
-bwa mem -t 8 -R '@RG\tID:HG00149\tSM:HG00149' /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/HG00149.R1.fastq /home/corso/varcall2016/project_1/fastq/HG00149.R2.fastq | samtools view -b - | samtools sort -  NA21102.sorted
+bwa mem  /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/HG00149.R1.fastq /home/corso/varcall2016/project_1/fastq/HG00149.R2.fastq | samtools view -b - | samtools sort -  NA21102.sorted
 
 ```
-as you can see we combined several processes using the pipe ` | ` and substituting the name of the input file with the standard in ` - `.
+as you can see we combined several processes using the pipe [` | `](https://en.wikipedia.org/wiki/Pipeline_%28Unix%29). Because we use pipe the [standard out](https://en.wikipedia.org/wiki/Standard_streams)  of one process become the [standard in](https://en.wikipedia.org/wiki/Standard_streams) of the successive process. Therefore  the standard in become the input file and we indicate this in the command line using the symbol ` - `.
 
-![pipe](../img/pipp.png)
+![loop2](../img/loop2.png)
+
 
 
 #### Note
@@ -118,11 +124,48 @@ as you can see we combined several processes using the pipe ` | ` and substituti
 #### 2) because we use absolute paths we don't copy fastq in our folders but we refer to them where they are on the machine
 
 
-To make a loop we first need a list on which to loop. You will find the list of individuals in the project folder under the name ` individuals.txt ` . Following basic bash loop structure we shall write:
+The next step is to make a loop over individuals (in this case HG00194 NA3333 HG45454 ):  
+
+![loop3](../img/loop3.png)
+
 
 ```
-for i in $(cat /home/corso/varcall2016/project_1/individuals.txt ); do  bwa mem -t 8 -R '@RG\tID:$i\tSM:$i' /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/$i.R1.fastq /home/corso/varcall2016/project_1/fastq/$i.R2.fastq | samtools view -b - | samtools sort - $i.sorted  ; done
+for i in HG00194 NA3333 HG45454; do  bwa mem /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/$i.R1.fastq /home/corso/varcall2016/project_1/fastq/$i.R2.fastq | samtools view -b - | samtools sort - $i.sorted  ; done
 ```
 
+**The loop will not produce output for every single step but only a single output at the end of the process and at all intermediate steps the output file is stored in the computer memory**
 
-![pipe](../img/lollo.png)
+
+If the list of individuals is long we might want to substitute the list with a command that open a file where every line is an individual:
+
+```
+for i in $(cat individuals.txt); do  bwa mem /home/corso/varcall2016/ref_b37/human_g1k_v37.fasta  /home/corso/varcall2016/project_1/fastq/$i.R1.fastq /home/corso/varcall2016/project_1/fastq/$i.R2.fastq | samtools view -b - | samtools sort - $i.sorted  ; done
+```
+
+For project 1 you will find the list of individuals in the project folder under the name ` individuals.txt `
+
+
+
+## `bgzip` and `tabix`
+(adapted from [here](https://github.com/ekg/alignment-and-variant-calling-tutorial#aligning-our-data-against-the-e-coli-k12-reference))
+
+We can speed up random access to VCF files by compressing them with `bgzip`, in the [htslib](https://github.com/samtools/htslib) package. `bgzip` is a "block-based GZIP", which compresses files in chunks of lines. This chunking let's us quickly seek to a particular part of the file, and support indexes to do so. The default one to use is `tabix`. It generates indexes of the file with the default name `.tbi`.
+
+```
+bgzip SRR1770413.vcf # makes SRR1770413.vcf.gz
+tabix -p vcf SRR1770413.vcf.gz
+```
+
+Now you can pick up a single part of the file. For instance, we could count the variants in a particular region:
+
+```
+tabix SRR1770413.vcf.gz NC_000913.3:1000000-1500000 | wc -l
+```
+
+If we want to pipe the output into a tool that reads VCF, we'll need to add the -h flag, to output the header as well.
+
+```
+tabix -h SRR1770413.vcf.gz NC_000913.3:1000000-1500000 | vcffilter ...
+```
+
+The bgzip format is very similar to that used in BAM, and the indexing scheme is also similar (blocks of compressed data which we build a chromosome position index on top of).
