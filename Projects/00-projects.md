@@ -169,3 +169,14 @@ tabix -h SRR1770413.vcf.gz NC_000913.3:1000000-1500000 | vcffilter ...
 ```
 
 The bgzip format is very similar to that used in BAM, and the indexing scheme is also similar (blocks of compressed data which we build a chromosome position index on top of).
+
+
+## VCF manipulation
+
+There are many tools for `.vcf`  file manipulation. Some of the features overlap among tools  and some other are very specific:
+
+- [Vcftools](https://vcftools.github.io/index.html)
+- [Vcflib](https://github.com/ekg/vcflib)
+- [bcftools](https://samtools.github.io/bcftools/bcftools.html)
+
+Rather than going trough all of them we will make one example using `[vcf2tsv]`(https://github.com/vcflib/vcflib#vcf2tsv) form **vcflib**.  This command converts the INFO  field of the `.vcf` into a tab-delimited  file that can be imported in R  for making plots. 
