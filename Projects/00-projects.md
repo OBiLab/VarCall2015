@@ -184,4 +184,4 @@ There are many tools for `.vcf`  file manipulation. Some of the features overlap
 - [Vcflib](https://github.com/ekg/vcflib)
 - [bcftools](https://samtools.github.io/bcftools/bcftools.html)
 
-Rather than going trough all of them we will make one example using `[vcf2tsv]`(https://github.com/vcflib/vcflib#vcf2tsv) form **vcflib**.  This command converts the INFO  field of the `.vcf` into a tab-delimited  file that can be imported in R  for making plots.
+Rather than going trough all of them we will make one example using [`vcf2tsv`](https://github.com/vcflib/vcflib#vcf2tsv) form **vcflib**.  This command converts the INFO  field of the `.vcf` into a tab-delimited  file that can be imported in R  for making plots.
